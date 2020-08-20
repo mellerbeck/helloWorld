@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    Deploy hellowWorld lambda
+
+Globals:
+    Function:
+        Timeout: 3
+
+Resources:
+
+    helloWorldFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: helloWorld
+            CodeUri: helloWorld/
+            Handler: app.lambda_handler
+            Runtime: python3.8
+            Tags:
+                "Cost Center": "TBC"
+                "Business Segment": "AWP"
+                "Business Unit": "Redmond"
+                "Department": "Telematics"
+
+Outputs:
+
+    helloWorldFunction:
+      Description: "Unsubscrie Lambda Function ARN"
+      Value: !GetAtt helloWorldFunction.Arn
+
+    helloWorldFunctionIamRole:
+      Description: "Implicit IAM Role created for helloWorld function"
+      Value: !GetAtt helloWorldFunctionRole.Arn
